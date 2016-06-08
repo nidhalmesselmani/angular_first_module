@@ -22,7 +22,7 @@
       events:true,
     });
 
-    //$urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('dashboard', {
