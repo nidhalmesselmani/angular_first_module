@@ -13,7 +13,8 @@
     'ui.router',
     'ui.bootstrap',
     'angular-loading-bar',
-      'satellizer'
+      'satellizer',
+      'ngDialog'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider','$authProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider,$authProvider) {
       $authProvider.loginUrl = 'http://localhost/Lumen_API/public/auth/login';
@@ -24,6 +25,7 @@
 
     $urlRouterProvider.otherwise('/login');
 
+//the states (the routes)
     $stateProvider
       .state('dashboard', {
         url:'/dashboard',
@@ -181,15 +183,31 @@
 
 
 app.run(function ($rootScope, $state,$location,$auth ) {
+    //for every state change this will trigger
      $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-
+//if the state destination has authenticated as true and the user is authenticated by satttelizer ($auth)
          if($auth.isAuthenticated() && toState.authenticate== true ){
 
          }else {
+             //if one of the condition is false he will be just redirected to the login page
              $location.path('/login');
          }
 
 
      });
+//a global function that triggers everytime the user press log out
+    $rootScope.logout = function() {
+        //uses satellizer materials to logout ($auth), so the sattelizer token will vanish and the user will be successfully logout
+        $auth.logout().then(function() {
+            //remover the user credentials from localstorage
+            localStorage.removeItem('user');
+            //affect null to the global variable $rootscope.currentUser
+            $rootScope.currentUser = null;
+            //finally go the login page
+            $state.go('login');
+        });
+    }
+    $rootScope.currentUser = JSON.parse(localStorage.getItem('user'));
+
  });
 

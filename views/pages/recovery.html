@@ -6,16 +6,17 @@
                     <h3 class="panel-title">Password Recovery</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" name="resetForm">
                         <fieldset>
                             <div class="form-group">
                                 <input class="form-control" placeholder="E-mail" name="email" type="email" ng-model="credentials.email"  autofocus>
                             </div>
+                            <a ui-sref="login"> return to login</a>
 
 
 
                             <!-- Change this to a button or input when using this as a form -->
-                            <a ng-click="reset_password()" class="btn btn-lg btn-success btn-block">submit</a>
+                            <a ng-click="reset_password()"  ng-disabled="resetForm.$invalid" class="btn btn-lg btn-success btn-block">submit</a>
                         </fieldset>
                     </form>
                 </div>
