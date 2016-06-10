@@ -8,7 +8,7 @@
  */
 angular.module('sbAdminApp')
 
-    .controller('settings', function($scope,$auth,$state,$window,ngDialog,$http,$rootScope) {
+    .controller('settings', function($scope,$auth,$state,$window,ngDialog,$http,$rootScope,API_URL) {
 
 
 
@@ -33,7 +33,7 @@ $scope.profileopen = function () {
         $scope.submit = function () {
             $http({
                 method: 'POST',
-                url: 'http://localhost/Lumen_API/public/change',
+                url: API_URL+'change',
                 //pass the password,the new password and the user id as paramaters
                 data: $.param({password : $scope.password, new_password : $scope.new_password, id: $rootScope.currentUser.id }),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}

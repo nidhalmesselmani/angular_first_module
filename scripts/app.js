@@ -15,9 +15,9 @@
     'angular-loading-bar',
       'satellizer',
       'ngDialog'
-  ])
-  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider','$authProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider,$authProvider) {
-      $authProvider.loginUrl = 'http://localhost/Lumen_API/public/auth/login';
+  ]).constant('API_URL','http://localhost/Lumen_API/public/')
+  .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider','$authProvider','API_URL',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider,$authProvider,API_URL) {
+      $authProvider.loginUrl = API_URL+'auth/login';
     $ocLazyLoadProvider.config({
       debug:false,
       events:true,

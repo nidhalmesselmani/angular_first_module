@@ -7,7 +7,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-    .controller('recoveryController', function($scope,$http,$rootScope) {
+    .controller('recoveryController', function($scope,$http,$rootScope,API_URL) {
 
    // a function to reset the password, here the user submit his email
  $scope.reset_password = function () {
@@ -15,7 +15,7 @@ angular.module('sbAdminApp')
 
      $http({
          method: 'POST',
-         url: 'http://localhost/Lumen_API/public/recovery',
+         url: API_URL+'recovery',
          //pass the email as a parameter
          data: $.param({email : $scope.credentials.email }),
 

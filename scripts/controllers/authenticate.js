@@ -7,7 +7,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-    .controller('authenticateCtrl', function($scope,$auth,$state,$window,$http,$rootScope) {
+    .controller('authenticateCtrl', function($scope,$auth,$state,$window,$http,$rootScope,API_URL) {
 
       //funtion that uses sattelizer materials to authenticated ($auth).
         $scope.login = function () {
@@ -15,7 +15,7 @@ angular.module('sbAdminApp')
             //sattelizer will store the token into localstorage so he can append to every next http call
        $auth.login($scope.credentials).then(function () {
            //get the authenticated user information
-           $http.get('http://localhost/Lumen_API/public/authuser').success(function(response){
+           $http.get(API_URL+'authuser').success(function(response){
             //converts the user credentials to JSON string
               var user = JSON.stringify(response.user);
                //store the user credentials into localstorage
